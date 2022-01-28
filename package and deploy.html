@@ -1,0 +1,11 @@
+
+package build
+zip -r demo-$BUILD_NUMBER.ZIP *
+aws s3 cp demo-$BUILD_NUMBER.ZIP s3://artifactory-devops/
+
+deploy package
+rm -rf *
+aws s3 cp s3://artifactory-devops/demo-$CHOICE.zip .
+unzip demo-$CHOICE.zip
+ssh root@10.1.0.202 'rm -rf /var/www/html/*'
+scp -r * root@10.1.0.202:/var/www/html/
