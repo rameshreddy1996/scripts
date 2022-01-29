@@ -9,3 +9,19 @@ aws s3 cp s3://artifactory-devops/demo-$CHOICE.zip .
 unzip demo-$CHOICE.zip
 ssh root@10.1.0.202 'rm -rf /var/www/html/*'
 scp -r * root@10.1.0.202:/var/www/html/
+
+i want deploy only one job in jenkins from artifactory-devops
+package-deployement-job
+
+zip -r package--$BUILD_NUMBER.zip *
+
+aws s3 cp package--$BUILD_NUMBER.zip s3://artifactory-devops/
+
+rm -fr *
+
+aws s3 cp s3://artifactory-devops/package--$BUILD_NUMBER.zip . 
+unzip package--$BUILD_NUMBER.zip
+ssh root@10.1.0.202 'rm -fr /var/www/html/*'
+scp -r * root@10.1.0.202:/var/www/html/
+
+rm -fr *
