@@ -1,0 +1,6 @@
+/opt/maven/bin/mvn clean package
+cd target/
+mv sparkjava-hello-world-1.0.war sparkjava-hello-world-$BUILD_NUMBER.war
+#upload to artifactory
+
+#aws s3 cp sparkjava-hello-world-$BUILD_NUMBER.war s3://bucket/sparkjava-hello-world-$BUILD_NUMBER.war
