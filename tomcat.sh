@@ -11,4 +11,12 @@ sudo unzip apache-tomcat-9.0.58-windows-x64.zip
 sudo rm -f apache-tomcat-9.0.58-windows-x64.zip
 sudo mv apache-tomcat* tomcat
 sudo chmod -R 755 /opt/tomcat/
+#start the tomact
 sudo sh /opt/tomcat/bin/startup.sh 
+# stop the tomact
+# sudo sh /opt/tomcat/bin/shutdown.sh
+# when youn install server how to check
+# ps -ef | grep tomcat
+# port listen or not
+# netstat -anlp | grep "8080"
+ 
