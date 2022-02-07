@@ -1,0 +1,21 @@
+#build package
+=============
+/opt/maven/bin/mvn clean package
+#rename package
+=========
+cd target/
+mv sparkjava-hello-world-1.0.war sparkjava-hello-world-$BUILD_NUMBER.war
+#push artifactory
+=================
+aws s3 cp sparkjava-hello-world-$BUILD_NUMBER.war s3://spark-java-1/sparkjava-hello-world-$BUILD_NUMBER.war 
+java application deploy
+============================
+/opt/maven/bin/mvn clean package
+cd target/
+mv sparkjava-hello-world-1.0.war sparkjava-$BUILD_NUMBER.war
+
+aws s3 cp sparkjava-$BUILD_NUMBER.war s3://spark-java-1/
+
+aws s3 cp s3://spark-java-1/sparkjava-$BUILD_NUMBER.war .
+
+scp sparkjava-$BUILD_NUMBER.war root@10.1.0.104:/opt/tomcat/webapps/
