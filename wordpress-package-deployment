@@ -1,0 +1,34 @@
+wordpress package job
+=========================
+zip -r wp-$BUILD_NUMBER.zip *
+aws s3 cp wp-$BUILD_NUMBER.zip s3://bobbywp/
+wordpress deployement job
+==============================
+# bring the pkg from s3 jenkins/node workspace
+#1
+aws s3 cp s3://bobbywp/wp-$pkg.zip .
+
+#2
+#if we have already content in webroot remove in remote(wp) from jenkins/node workspace
+ssh root@172.31.86.34 'rm -fr /var/www/html/*'
+#3
+# create tmporary directory in remote server from jenkins/node
+ssh root@172.31.86.34 'mkdir /tmp/php'
+
+# copy the pkg from downloaded in step-1 to remote server temporary location
+scp wp-$pkg.zip root@172.31.86.34:/tmp/php
+
+#unzip the pkg in remote server temporary location
+ssh root@172.31.86.34 'unzip /tmp/php/wp-*.zip -d /tmp/php'
+
+# remove the temporary content of zip in remote server
+ssh root@172.31.86.34 'rm -f /tmp/php/*.zip'
+
+# extracted content should get copies to webroot 
+ssh root@172.31.86.34 'cp -r /tmp/php/* /var/www/html/'
+
+# remove the extracted content in temporary folder in remote server
+ssh root@172.31.86.34 'rm -fr /tmp/php/'
+
+# clear the workspace in jenkins/node
+rm -f wp-$pkg.zip
