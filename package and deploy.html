@@ -1,9 +1,19 @@
 
 package build
+===================
 zip -r demo-$BUILD_NUMBER.ZIP *
 aws s3 cp demo-$BUILD_NUMBER.ZIP s3://artifactory-devops/
 
 deploy package
+=================================
+how to you authenticate source (jenkins(job))to(apache(anyserver)(server))
+==========================================================================
+first you have create ssh <keygen>(.ssh)(id_rsa,id_rsa_pub) in jenkins
+========================================================================
+now you can take id_rsa_pub give an apache server in authorized keys
+=========================================================================
+first you ahave allow source port(jenkins) in apache sg(jenkins reference)
+====================================================================================
 rm -rf *
 aws s3 cp s3://artifactory-devops/demo-$CHOICE.zip .
 unzip demo-$CHOICE.zip
@@ -12,6 +22,7 @@ scp -r * root@10.1.0.202:/var/www/html/
 
 i want deploy only one job in jenkins from artifactory-devops
 package-deployement-job
+================================================
 
 zip -r package--$BUILD_NUMBER.zip *
 
