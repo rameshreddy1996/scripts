@@ -20,9 +20,9 @@ sudo sh /opt/tomcat/bin/startup.sh
 # port listen or not
 # netstat -anlp | grep "8080"
  
-tomact new version
+#tomact new version
 =========================
- yum install git -y
+ #yum install git -y
    #git clone https://github.com/rameshreddy1996/scripts.git
    #  ls -ltrh
     # cd scripts/
